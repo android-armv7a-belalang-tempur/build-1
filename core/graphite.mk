@@ -14,6 +14,12 @@
 #
 # Force disable some modules that are not compatible with graphite flags
 LOCAL_DISABLE_GRAPHITE := \
+	mdnsd \
+	fio \
+	nano \
+	liblsof \
+	libavcodec \
+	libjni_filtershow_filters \
 	libunwind \
 	libFFTEm \
 	libicui18n \
@@ -24,7 +30,8 @@ LOCAL_DISABLE_GRAPHITE := \
 	libart \
 	libstagefright_amrwbenc \
 	libpdfium \
-	libpdfiumcore
+	libpdfiumcore \
+        libwebrtc_spl
 
 ifneq (1,$(words $(filter $(LOCAL_DISABLE_GRAPHITE), $(LOCAL_MODULE))))
 ifdef LOCAL_CONLYFLAGS
