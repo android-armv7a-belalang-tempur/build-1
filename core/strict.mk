@@ -14,6 +14,31 @@
 #
 
 LOCAL_DISABLE_STRICT := \
+	camera.omap4 \
+	audio.primary.piranha \
+	libtee_client_api_driver \
+	mm-vdec-omx-test \
+	libOmxVenc \
+	libqsap_sdk \
+	lsof \
+	tinyxml \
+	camera.msm8084 \
+	hwcomposer.msm8084 \
+	bionic \
+	libavutil \
+	libavcodec \
+	gatt_testtool \
+	libwnndict \
+ 	libxml2 \
+	busybox \
+	libbusybox \
+	libfuse \
+	libmtdutils \
+	libstlport_static \
+	libdl \
+	libc_common \
+	stlport \
+	libcrypto_static \
 	libc_bionic \
 	libc_dns \
 	libc_tzcode \
@@ -63,7 +88,9 @@ LOCAL_DISABLE_STRICT := \
 	libc_gdtoa \
 	libc_openbsd \
 	libc \
-	libc_nomalloc
+	libc_nomalloc \
+        libcurl \
+	libc_malloc
 
 ifneq (1,$(words $(filter $(LOCAL_DISABLE_STRICT), $(LOCAL_MODULE))))
 ifndef LOCAL_CONLYFLAGS
