@@ -160,9 +160,9 @@ ifeq ($(TARGET_ARCH),arm)
     endif
     ifneq ($(TARGET_KERNEL_CUSTOM_TOOLCHAIN),)
         ifeq ($(HOST_OS),darwin)
-            ARM_CROSS_COMPILE:=CROSS_COMPILE="$(ccache) $(ANDROID_BUILD_TOP)/prebuilt/darwin-x86/toolchain/$(TARGET_KERNEL_CUSTOM_TOOLCHAIN)"
+            ARM_CROSS_COMPILE:=CROSS_COMPILE="$(ccache) $(ANDROID_BUILD_TOP)/prebuilts/gcc/darwin-x86/arm/arm-eabi-$(TARGET_KERNEL_CUSTOM_TOOLCHAIN)/bin/arm-eabi-"
         else
-            ARM_CROSS_COMPILE:=CROSS_COMPILE="$(ccache) $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/$(TARGET_KERNEL_CUSTOM_TOOLCHAIN)"
+            ARM_CROSS_COMPILE:=CROSS_COMPILE="$(ccache) $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/arm-eabi-$(TARGET_KERNEL_CUSTOM_TOOLCHAIN)/bin/arm-eabi-"
         endif
     else
         ARM_CROSS_COMPILE:=CROSS_COMPILE="$(ccache) $(KERNEL_TOOLCHAIN)/$(KERNEL_TOOLCHAIN_PREFIX)"
@@ -171,7 +171,7 @@ ifeq ($(TARGET_ARCH),arm)
 endif
 
 ifeq ($(HOST_OS),darwin)
-  MAKE_FLAGS := C_INCLUDE_PATH=$(ANDROID_BUILD_TOP)/external/elfutils/libelf
+  MAKE_FLAGS := C_INCLUDE_PATH=$(ANDROID_BUILD_TOP)/external/elfutils/0.153/libelf/
 endif
 
 ifeq ($(TARGET_KERNEL_MODULES),)
