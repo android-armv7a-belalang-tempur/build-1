@@ -112,17 +112,16 @@ endif
 # limitations under the License.
 #
 # Include custom gcc flags.  Seperate them so they can be easily managed.
-
-ifeq ($(STRICT_ALIASING),true)
-include $(BUILD_SYSTEM)/strict.mk
-endif
-
 ifeq ($(GRAPHITE_OPTS),true)
 ifndef LOCAL_IS_HOST_MODULE
 ifeq ($(LOCAL_CLANG),)
 include $(BUILD_SYSTEM)/graphite.mk
 endif
 endif
+endif
+
+ifeq ($(STRICT_ALIASING),true)
+include $(BUILD_SYSTEM)/strict.mk
 endif
 
 # The following LOCAL_ variables will be modified in this file.
