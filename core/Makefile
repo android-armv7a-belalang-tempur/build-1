@@ -1656,7 +1656,28 @@ ifneq ($(TARGET_UNIFIED_DEVICE),)
     endif
 endif
 
-ifneq ($(NO_BLOCK_OTA),true)
+ifneq ($(GAMERMOD_BUILD_BLOCK),0)
+ifneq ($(GAMERMOD_BUILD_BLOCK),1)
+ GAMERMOD_BUILD_BLOCK := 1
+endif
+endif
+
+ifeq ($(GAMERMOD_BUILD_BLOCK),0)
+$(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) $(DISTTOOLS)
+	@echo "$(OTA_FROM_TARGET_SCRIPT)" > $(PRODUCT_OUT)/ota_script_path
+	@echo "$(override_device)" > $(PRODUCT_OUT)/ota_override_device
+	@echo -e ${CL_YLW}"Package OTA:"${CL_RST}" $@"
+	$(hide) MKBOOTIMG=$(MKBOOTIMG) \
+	   $(OTA_FROM_TARGET_SCRIPT) -v \
+	   -p $(HOST_OUT) \
+	   -k $(KEY_CERT_PAIR) \
+	   --backup=$(backuptool) \
+	   --override_device=$(override_device) $(override_prop) \
+	   $(if $(OEM_OTA_CONFIG), -o $(OEM_OTA_CONFIG)) \
+	   $(BUILT_TARGET_FILES_PACKAGE) $@
+endif
+
+ifeq ($(GAMERMOD_BUILD_BLOCK),1)
 $(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) $(DISTTOOLS)
 	@echo "$(OTA_FROM_TARGET_SCRIPT)" > $(PRODUCT_OUT)/ota_script_path
 	@echo "$(override_device)" > $(PRODUCT_OUT)/ota_override_device
@@ -1671,20 +1692,7 @@ $(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) $(DISTTOOLS)
 	   --override_device=$(override_device) $(override_prop) \
 	   $(if $(OEM_OTA_CONFIG), -o $(OEM_OTA_CONFIG)) \
 	   $(BUILT_TARGET_FILES_PACKAGE) $@
-else
-$(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) $(DISTTOOLS)
-	@echo "$(OTA_FROM_TARGET_SCRIPT)" > $(PRODUCT_OUT)/ota_script_path
-	@echo "$(override_device)" > $(PRODUCT_OUT)/ota_override_device
-	@echo -e ${CL_YLW}"Package OTA:"${CL_RST}" $@"
-	$(hide) MKBOOTIMG=$(MKBOOTIMG) \
-	   $(OTA_FROM_TARGET_SCRIPT) -v \
-	   -p $(HOST_OUT) \
-	   -k $(KEY_CERT_PAIR) \
-	   --backup=$(backuptool) \
-	   --override_device=$(override_device) $(override_prop) \
-	   $(if $(OEM_OTA_CONFIG), -o $(OEM_OTA_CONFIG)) \
-	   $(BUILT_TARGET_FILES_PACKAGE) $@
-endif
+endif	   
 
 BLISS_TARGET_PACKAGE := $(PRODUCT_OUT)/$(BLISS_VERSION).zip
 

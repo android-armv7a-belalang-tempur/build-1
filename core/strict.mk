@@ -29,7 +29,7 @@ LOCAL_DISABLE_STRICT := \
 	libavcodec \
 	gatt_testtool \
 	libwnndict \
- 	libxml2 \
+	libxml2 \
 	busybox \
 	libbusybox \
 	libfuse \
