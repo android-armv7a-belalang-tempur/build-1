@@ -603,11 +603,21 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   script.Unmount("/data")
   script.AppendExtra("endif;")
 
+  script.Print("")
   script.Print("******************************************");
-  script.Print("*   BlissPopGM Rom");
+  script.Print("* ___ _ _       ___           ___ __  __ *");
+  script.Print("*| _ ) (_)_____| _ \___ _ __ / __|  \/  |*");
+  script.Print("*| _ \ | (_-<_-<  _/ _ \ '_ \ (_ | |\/| |*");
+  script.Print("*|___/_|_/__/__/_| \___/ .__/\___|_|  |_|*");
+  script.Print("*                      |__|              *");
+  script.Print("*                                        *");
   script.Print("******************************************");
-  script.Print("*   Created By gamerman123x");
-  script.Print("******************************************");    
+  script.Print("******************************************");
+  script.Print("************  BlissPopGM ROM  ************");
+  script.Print("******************************************");
+  script.Print("***********  By: gamerman123x  ***********");
+  script.Print("******************************************");
+  script.Print("")   
  # namelessv = GetBuildProp("ro.cm.version", OPTIONS.info_dict)
   builddate = GetBuildProp("ro.build.date", OPTIONS.info_dict)
  # releasetype = GetBuildProp("ro.cm.releasetype", OPTIONS.info_dict)
